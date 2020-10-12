@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState } from "react";
 import './App.css';
 
 function App() {
+  const [taskList, setTaskList] = useState(["juu", "jaa", "joo"])
+  const [newTaskItem, updateNewTaskItem] = useState("")  
+
+  let addNewTaskToList = function(taskItem) {
+      let taskListCopy = [...taskList]
+      taskListCopy.push(taskItem)
+      setTaskList(taskListCopy)
+
+    }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <input type="text" value={newTaskItem} onChange={ (e) => updateNewTaskItem(e.target.value)}/>
+    <input type="button" value="Lisää taski" onClick= {() => addNewTaskToList(newTaskItem) } />
+
+      {taskList.map( (singleTask)  => <p>{singleTask}</p>)}
+      
+     {/* <button type = "button" onClick={() => increaseCounter(counter + 1)}>Laskurin arvo {counter}</button> */}
     </div>
   );
 }
